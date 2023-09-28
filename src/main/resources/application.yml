@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: aws
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: [암호화된 DB 주소]
+    username: [암호화된 DB 사용자 이름]
+    password: [암호화된 DB 패스워드]
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  batch:
+    jdbc:
+      initialize-schema: never
+  main:
+    allow-bean-definition-overriding: true
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+coupang:
+  secret_key: [쿠팡연동비밀키]
+  access_key: [쿠팡연동접속키]
+  domain: https://api-gateway.coupang.com
+common:
+  realestate:
+    url: http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev
+    service_key: [서비스키(디코딩)]
