@@ -1,6 +1,7 @@
 package com.jobs.jobspushagent.thread;
 
 
+import com.jobs.jobspushagent.service.MngQueueDtoList;
 import com.jobs.jobspushagent.service.MngQueueList;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,8 +14,11 @@ import java.time.format.DateTimeFormatter;
 public class PushSendThread extends Thread{
     MngQueueList mngQueueList;
 
-    public PushSendThread(MngQueueList mngQueueList){
+    MngQueueDtoList mngQueueDtoList;
+
+    public PushSendThread(MngQueueList mngQueueList, MngQueueDtoList mngQueueDtoList){
         this.mngQueueList = mngQueueList;
+        this.mngQueueDtoList = mngQueueDtoList;
     }
 
     @Override
@@ -27,7 +31,11 @@ public class PushSendThread extends Thread{
                 log.info("PushSendThread run [{}].. {}",name, LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
 
                 mngQueueList.pollQueue();
-                Thread.sleep(1000);
+
+                log.info("mngQueueDtoList.printQueueSize() >> {}", mngQueueDtoList.queueSize());
+                log.info("pushSendRequestDto >> {}", mngQueueDtoList.pollQueue() );
+
+                Thread.sleep(10);
             }
         }catch(Exception e){
             e.printStackTrace();

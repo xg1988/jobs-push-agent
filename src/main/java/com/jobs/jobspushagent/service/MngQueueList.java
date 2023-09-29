@@ -13,12 +13,10 @@ public class MngQueueList {
 
     public void addQueue(String addStr){
         queue.add(addStr);
-        log.info("queue size >> {} ", queue.size());
     }
 
     public void pollQueue(){
         queue.poll();
-        log.info("queue size >> {} ", queue.size());
     }
 
     public void printQueueSize(){
